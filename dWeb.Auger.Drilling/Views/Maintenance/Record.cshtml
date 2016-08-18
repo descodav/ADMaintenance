@@ -1,0 +1,232 @@
+﻿@using dWeb.Auger.Drilling.Models
+@model ViewWorkOrder
+@{
+    ViewBag.Title = "Work Order:";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Work Order</h2>
+        </div>
+        <div class="col-md-6" style="padding-top:25px;">
+            <a href="~/Maintenance/EditRecord?record=@Model.Id" class="btn btn-warning pull-right">Edit Work Order</a>
+        </div>
+    </div>
+    <div class="row" style="padding-top:7px;">
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <span class="panel-title"><span class="fa fa-wrench"></span> Work Order</span>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4" style="padding-top:2px;">
+                                Id
+                            </div>
+                            <div class="col-md-8">
+                                @Model.Id
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4" style="padding-top:2px;">
+                                Status
+                            </div>
+                            <div class="col-md-8">
+                                @Model.Status
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4" style="padding-top:2px;">
+                                Assigned
+                            </div>
+                            <div class="col-md-8">
+                                @Model.Assigned
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom:10px;">
+                        <div class="form-group">
+                            <div class="col-md-4" style="padding-top:2px;">
+                                Assigned
+                            </div>
+                            <div class="col-md-8">
+                                @Model.AssignedDate
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row" style="padding-top:10px;padding-bottom:64px;">
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                Cost
+                            </div>
+                            <div class="col-md-3">
+                                $@Model.TotalCost
+                            </div>
+                            <div class="col-md-3">
+                                Hours
+                            </div>
+                            <div class="col-md-3">
+                                @Model.TotalHours
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="panel-title">Equipment</span>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4" style="padding-top:2px;">
+                                Number
+                            </div>
+                            <div class="col-md-8">
+                                @Model.RigInfo.RigNumber
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4" style="padding-top:2px;">
+                                Make/Model
+                            </div>
+                            <div class="col-md-8">
+                                @Model.RigInfo.Model @Model.RigInfo.Make
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4" style="padding-top:2px;">
+                                Purchased
+                            </div>
+                            <div class="col-md-8">
+                                @Model.RigInfo.PurchasedDate.ToShortDateString()
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-bottom:10px;">
+                        <div class="form-group">
+                            <div class="col-md-4" style="padding-top:2px;">
+                                Age
+                            </div>
+                            <div class="col-md-8">
+                                Approx. @Model.RigInfo.Age
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="row text-center" style="padding-bottom:7px;">
+                                    <span>Oil</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        Last
+                                    </div>
+                                    <div class="col-md-8" style="border-right: solid 1px #121212">
+                                        @Model.RigInfo.LastOilChange.ToShortDateString()
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4" style="padding-top:7px;">
+                                        Change
+                                    </div>
+                                    <div class="col-md-8" style="border-right: solid 1px #121212">
+                                        @if (Model.OilChange)
+                                        {
+                                            @:<i class="fa fa-check fa-2x text-success"></i>
+                                        }
+                                        else
+                                        {
+                                            @:<i class="fa fa-times fa-2x text-danger"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="row text-center" style="padding-bottom:7px;">
+                                    <span>Hydro-Filters</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        Last
+                                    </div>
+                                    <div class="col-md-8">
+                                        @Model.RigInfo.LastFilterChange.ToShortDateString()
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4" style="padding-top:6px;">
+                                        Change
+                                    </div>
+                                    <div class="col-md-8">
+                                        @if (Model.FilterChange)
+                                        {
+                                            @:<i class="fa fa-check fa-2x text-success"></i>
+                                        }
+                                        else
+                                        {
+                                            @:<i class="fa fa-times fa-2x text-danger"></i>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top:7px;padding-left:30px;">
+        <div class="form-group">
+            <div class="row">
+                Requested Maintenance
+            </div>
+            <div class="row" style="padding-top:7px;">
+                @Model.Request
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top:7px;padding-left:30px;">
+        <table class="table">
+            <tr>
+                <th style="width:10%">Number</th>
+                <th style="width:10%">Name</th>
+                <th style="width:56%">Description</th>
+                <th style="width:10%">Reason</th>
+                <th style="width:7%">Cost</th>
+                <th style="width:7%">Hours</th>
+            </tr>
+            @foreach (var part in Model.Parts)
+            {
+                <tr>
+                    <td>@part.Number</td>
+                    <td>@part.Name</td>
+                    <td>@part.Description</td>
+                    <td>@part.Reason.ToString()</td>
+                    <td>$@part.Cost</td>
+                    <td>@part.Hours</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

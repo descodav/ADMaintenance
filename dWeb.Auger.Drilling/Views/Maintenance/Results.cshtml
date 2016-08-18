@@ -1,0 +1,59 @@
+﻿@using dWeb.Auger.Drilling.Models
+@model SearchResults
+<div class="row" style="padding-top:15px;">
+    <table class="table">
+        <tr>
+            <th style="width:8%;">Rig Number</th>
+            <th style="width:49%;">Maintenance</th>
+            <th class="text-center" style="width:8%;">Last Maint. Date</th>
+            <th class="text-center" style="width:7%;">Status</th>
+            <th class="text-center" style="width:7%;">Oil Changed</th>
+            <th class="text-center" style="width:9%;">Hydro-Filters Changed</th>
+            <th style="width:12%;"></th>
+        </tr>
+        @foreach (var record in Model.Records)
+        {
+            <tr style="line-height:27px!important;">
+
+                <td style="vertical-align:middle!important;">@record.RigNumber</td>
+                <td style="vertical-align:middle!important;">@record.MaintDescription</td>
+                <td class="text-center" style="vertical-align:middle!important;">@record.LastMaintDate.ToShortDateString()</td>
+                <td class="text-center" style="vertical-align:middle!important;">@record.Status</td>
+                <td class="text-center" style="vertical-align:middle!important;">
+                    @if (record.OilChanged)
+                    {
+                        @:<i class="fa fa-check fa-2x text-success"></i>
+                    }
+                    else
+                    {
+                        @:<i class="fa fa-times fa-2x text-danger"></i>
+                    }
+
+                </td>
+                <td class="text-center" style="vertical-align:middle!important;">
+                    @if (record.FiltersChanged)
+                    {
+                        @:<i class="fa fa-check fa-2x text-success"></i>
+                    }
+                    else
+                    {
+                        @:<i class="fa fa-times fa-2x text-danger"></i>
+                    }
+
+                </td>
+                <td style="vertical-align:middle!important;">
+                    <a href="~/Maintenance/Record/?record=@record.Id" class="btn btn-info btn-sm" style="margin-right:0px;" title="View Work Order"><i class="fa fa-binoculars"></i></a>
+
+                    @if (User.IsInRole("Office") || User.IsInRole("Administrator"))
+                    {
+                        @:<a href="~/Maintenance/EditRecord/?record=@record.Id" class="btn btn-primary btn-sm" style="margin-right:0px;" title="Edit Work Order"><i class="fa fa-edit"></i></a>
+                        if (User.IsInRole("Administrator"))
+                        {
+                            @:<a href="~/Maintenance/DeleteRecord/?record=@record.Id" class="btn btn-danger btn-sm" title="Delete Work Order"><i class="fa fa-trash"></i></a>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>

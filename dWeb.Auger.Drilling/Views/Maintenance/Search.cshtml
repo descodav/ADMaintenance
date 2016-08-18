@@ -1,0 +1,20 @@
+﻿@using dWeb.Auger.Drilling.Models
+@model Search
+@using (Ajax.BeginForm("SearchFor", null, new AjaxOptions { HttpMethod = "POST" }, new { @id = "Search-Form", role = "form", @class = "form-horizontal", @style = "padding-top: 15px;" }))
+{
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-2">
+        @Html.DropDownListFor(m => m.SearchBy, Model.SearchByList, "Select Lookup", new { @class = "form-control" })
+    </div>
+    <div class="col-md-3">
+        @Html.TextBoxFor(m => m.SearchValue, new { placeholder = "Search Value", @class = "form-control" })
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-search"></i> Search
+        </button>
+    </div>
+</div>
+@Html.Partial("Results", Model.Results)
+}

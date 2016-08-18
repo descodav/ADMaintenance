@@ -1,0 +1,154 @@
+﻿@using dWeb.Auger.Drilling.Models
+@model WorkOrder
+<script>
+    function SetHiddenValue(checkboxid, hiddenfieldid) {
+        var checkbox = document.getElementById(checkboxid);
+        var hiddenField = document.getElementById(hiddenfieldid);
+        hiddenField.value = checkbox.checked;
+    }
+</script>
+@using (Ajax.BeginForm("NewEditWorkOrderSubmit", null, new AjaxOptions { HttpMethod = "POST" }, new { @id = "WorkOrder-Form", role = "form", @class = "form-horizontal", @style = "padding-top: 15px;" }))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.RigNumber, "Rig Number", new { @class = "control-label pull-right" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(m => m.RigNumber, Model.RigNumberList, "Select Rig", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.Status, "Status", new { @class = "control-label pull-right" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.EnumDropDownListFor(m => m.Status, "Select Status", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.RigNumber, "Assigned", new { @class = "control-label pull-right" })
+                        </div>
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(m => m.Assigned, Model.AssignedList, "Select Employee", new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.LabelFor(m => m.Request, "Maintenance Requested", new {@class = "control-label" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.TextAreaFor(m => m.Request, 11, 400, new {@class = "form-control" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-offset-1 col-md-5">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="panel-title">Quick Check</span><span class="pull-right" style="font-size:9pt;padding-top:8px;">Last Maint.:  @Model.LastMaintDate.ToShortDateString()</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(m => m.OilChange, "Oil Change", new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-6 material-switch" style="padding-top:8px;">
+                                        <input type="checkbox" id="OilCheckCheckBox" name="OilCheckCheckBox" onchange="SetHiddenValue('OilCheckCheckBox', 'OilChangeHidden')" />
+                                        <label for="OilCheckCheckBox" class="label-success"></label>
+                                        @Html.HiddenFor(m => m.OilChange, new { @id = "OilChangeHidden" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-7">
+                                        @Html.LabelFor(m => m.LastOilChange, "Last Oil Change", new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-5" style="padding-top:8px;">
+                                        <span>@Model.LastOilChange.ToShortDateString()</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(m => m.FilterChange, "Filter Change", new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-6 material-switch" style="padding-top:8px;">
+                                        <input type="checkbox" id="FilterCheckCheckBox" name="FilterCheckCheckBox" onchange="SetHiddenValue('FilterCheckCheckBox','FilterChangeHidden')" />
+                                        <label for="FilterCheckCheckBox" class="label-success"></label>
+                                        @Html.HiddenFor(m => m.FilterChange, new { @id = "FilterChangeHidden" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-7">
+                                        @Html.LabelFor(m => m.LastFilterChange, "Last Filter Change", new { @class = "control-label pull-right" })
+                                    </div>
+                                    <div class="col-md-5" style="padding-top:8px;">
+                                        <span>@Model.LastFilterChange.ToShortDateString()</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <span style="font-size:9pt;">Remember your Oil and Filter change schedule!</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="panel-title">Tracking</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-10 control-label">Send standard notification once this work order is closed!</div>
+                            <div class="col-md-2 material-switch"style="padding-top:8px;">
+                                <input type="checkbox" id="NotifyTrackingCheckBox" name="NotifyTrackingCheckBox" onchange="SetHiddenValue('FilterCheckCheckBox', 'NotifyTrackingHidden')" />
+                                <label for="NotifyTrackingCheckBox" class="label-success"></label>
+                                @Html.HiddenFor(m => m.NotifyTracking, new { @id = "NotifyTrackingHidden" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <span style="font-size:9pt;">Notify me when this ticket is closed!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="~/Maintenance/Index" class="btn btn-danger pull-right" >Cancel</a>
+        </div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary">
+                Submit
+            </button>
+        </div>
+    </div>
+}

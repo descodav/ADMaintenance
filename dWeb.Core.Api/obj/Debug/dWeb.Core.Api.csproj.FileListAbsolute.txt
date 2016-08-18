@@ -1,0 +1,9 @@
+C:\Users\David\Documents\Visual Studio 2015\Projects\dWebDevelopment\dWeb.Core.Api\bin\dWeb.Core.Api.dll.config
+C:\Users\David\Documents\Visual Studio 2015\Projects\dWebDevelopment\dWeb.Core.Api\bin\dWeb.Core.Api.dll
+C:\Users\David\Documents\Visual Studio 2015\Projects\dWebDevelopment\dWeb.Core.Api\bin\dWeb.Core.Api.pdb
+C:\Users\David\Documents\Visual Studio 2015\Projects\dWebDevelopment\dWeb.Core.Api\bin\Nancy.dll
+C:\Users\David\Documents\Visual Studio 2015\Projects\dWebDevelopment\dWeb.Core.Api\bin\Nancy.Hosting.Aspnet.dll
+C:\Users\David\Documents\Visual Studio 2015\Projects\dWebDevelopment\dWeb.Core.Api\bin\Nancy.xml
+C:\Users\David\Documents\Visual Studio 2015\Projects\dWebDevelopment\dWeb.Core.Api\bin\Nancy.Hosting.Aspnet.xml
+C:\Users\David\Documents\Visual Studio 2015\Projects\dWebDevelopment\dWeb.Core.Api\obj\Debug\dWeb.Core.Api.dll
+C:\Users\David\Documents\Visual Studio 2015\Projects\dWebDevelopment\dWeb.Core.Api\obj\Debug\dWeb.Core.Api.pdb

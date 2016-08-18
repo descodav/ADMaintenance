@@ -1,0 +1,55 @@
+﻿@using dWeb.Auger.Drilling.Models
+@model ManagementViewModel
+
+@{
+    ViewBag.Title = "Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <h2>Management</h2>
+    <ul class="nav nav-tabs">
+        
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Equipment
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a data-toggle="tab" href="#menu1">Add</a></li>
+                <li><a data-toggle="tab" href="#menu2">Search</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Employees
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="~/Account/Register">Add</a></li>
+                <li><a data-toggle="tab" href="#menu4">Search</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        
+        <div id="menu1" class="tab-pane fade">
+            <h3>Add Equipment</h3>
+            
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <h3>Search Equipment</h3>
+            <p>Some content in menu 2.</p>
+        </div>
+        <div id="registerEmployee" class="tab-pane fade">
+            <h3>Add Employee</h3>
+            @Html.Partial("AddEmployee", Model.regModel)
+        </div>
+        <div id="menu4" class="tab-pane fade">
+            <h3>Search Employees</h3>
+            <p>Some content in menu 2.</p>
+        </div>
+    </div>
+</div>
